@@ -1,23 +1,33 @@
-mod hist_rotors;
+pub mod rotor;
 
-use hist_rotors::is_unique_wiring;
+use lazy_static::lazy_static;
+use rotor::Rotor;
 
-struct Rotor {
-    wiring: String,
+#[derive(Debug)]
+struct Enigma {
+    main_rotors: Vec<Rotor>,
+    entry_rotor: Option<Rotor>,
+    reflect_rotor: Option<Rotor>,
 }
 
-impl Rotor {
-    pub fn new(wiring: &str) -> Self {
-        let wiring = is_unique_wiring(wiring);
-
+impl Enigma {
+    pub fn new(
+        main_rotors: Vec<Rotor>,
+        entry_rotor: Option<Rotor>,
+        reflect_rotor: Option<Rotor>,
+    ) -> Self {
         Self {
-            wiring: wiring.to_string(),
+            entry_rotor,
+            main_rotors,
+            reflect_rotor,
         }
     }
 }
 
-struct Enigma {
-    rotors: Vec<Rotor>,
+lazy_static! {
+    // pub static ref MilEnigma: Enigma = Enigma::new(
+    //     rotor::german_rail::
+    // );
 }
 
 #[cfg(test)]
